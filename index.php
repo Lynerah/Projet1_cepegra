@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projet 1 : Cepegra</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link rel="stylesheet" href="./src/style.css">
+<?php require('config.php');?>
+<?php include("header.php");?>
+<?php
+//INSERT
+    if(isset($_POST['add_visite'])):
+        // $sql = "INSERT INTO `news` (`titre`, `contenu`) VALUES ('.$_POST['titre].', '.$_POST['contenu].')';"
 
-</head>
-<body>
-  <main>
+        echo $sql = sprintf("INSERT INTO `visiteur` (`firstname`, `lastname`) VALUES ('%s', '%s')",
+        addslashes($_POST['firstname']),
+        addslashes($_POST['lastname'])
+        );
+        // exit;
+        $connect->query($sql);
+        echo $connect->error;
+        $last_id = $connect->insert_id;
+        $retour_page = $_SERVER['HTTP_REFERER'];
+        header('location:$retour_page');
+    endif;
+?>
+<main>
     <div>
       <h2>Bienvenue au Cepegra</h2>
     </div>
@@ -20,13 +27,23 @@
         id="step_1"
         class="step stepsgroup_1 activestep"
       >
+        <div class="column">
+        <input type="file" accept="image/*" capture="user" onchange="loadFile(event)">
+        <img id="output">
+        <script type="text/javascript">
+            var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
+        </div>
         <div class="columns">
             <!-- Nom -->
             <div class="field">
               <label class="label">Nom</label>
               <div class="control">
                 <input
-                  class="input"
+                  class="input" name="lastname"
                   type="text"
                   placeholder="Text input"
                 />
@@ -37,7 +54,7 @@
               <label class="label">Prénom</label>
               <div class="control">
                 <input
-                  class="input"
+                  class="input" name="firstname"
                   type="text"
                   placeholder="Text input"
                 />
@@ -51,7 +68,7 @@
                 class="control has-icons-left has-icons-right"
               >
                 <input
-                  class="input is-danger"
+                  class="input is-danger" name="mail"
                   type="email"
                   placeholder="Email input"
                 />
@@ -158,6 +175,7 @@
           </div> -->
 
           <div class="control">
+            <input type="hidden" name="add_visite">
             <button class="button btnSubmit is-success is-rounded">
               Envoyer
             </button>
@@ -170,5 +188,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script src="./src/index.js"></script>
   <script src="./src/autocomplete.js"></script>
-</body>
-</html>
+
+<?php include("footer.php");?>
+<?php //include("debug.php");?>
