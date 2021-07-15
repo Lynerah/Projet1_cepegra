@@ -22,7 +22,7 @@
       <h2>Bienvenue au Cepegra</h2>
     </div>
     <div>
-      <form action="" method="post" class="form-visite">
+      <form action="message-contact.php" method="post" class="form-visite">
         <fieldset
         id="step_1"
         class="step stepsgroup_1 activestep"
@@ -40,10 +40,10 @@
         <div class="columns">
             <!-- Nom -->
             <div class="field">
-              <label class="label">Nom</label>
+              <label class="label" for="inputLastName">Nom</label>
               <div class="control">
                 <input
-                  class="input" name="lastname"
+                  class="input" name="lastname" id="inputLastName"
                   type="text"
                   placeholder="Text input"
                 />
@@ -51,10 +51,10 @@
             </div>
             <!-- Prenom -->
             <div class="field">
-              <label class="label">Prénom</label>
+              <label class="label" for="inputFristName">Prénom</label>
               <div class="control">
                 <input
-                  class="input" name="firstname"
+                  class="input" name="firstname" id="inputFristName"
                   type="text"
                   placeholder="Text input"
                 />
@@ -63,12 +63,12 @@
 
             <!-- Email -->
             <div class="field">
-              <label class="label">Email</label>
+              <label class="label" for="inputMail">Email</label>
               <div
                 class="control has-icons-left has-icons-right"
               >
                 <input
-                  class="input is-danger" name="mail"
+                  class="input is-danger" name="mail" id="inputMail"
                   type="email"
                   placeholder="Email input"
                 />
@@ -176,7 +176,7 @@
 
           <div class="control">
             <input type="hidden" name="add_visite">
-            <button class="button btnSubmit is-success is-rounded">
+            <button type="submit" class="button btnSubmit is-success is-rounded">
               Envoyer
             </button>
           </div>
